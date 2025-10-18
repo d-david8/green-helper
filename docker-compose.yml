@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: greenhelper-db
+    environment:
+      POSTGRES_USER: GreenHelperUser
+      POSTGRES_PASSWORD: GreenHelperPassword
+      POSTGRES_DB: green_helper_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: greenhelper-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/green_helper_db
+      SPRING_DATASOURCE_USERNAME: GreenHelperUser
+      SPRING_DATASOURCE_PASSWORD: GreenHelperPassword
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:
