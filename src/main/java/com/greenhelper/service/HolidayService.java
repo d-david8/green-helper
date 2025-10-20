@@ -1,10 +1,13 @@
 package com.greenhelper.service;
 
 import com.greenhelper.dto.HolidayDto;
+
+import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -32,6 +35,8 @@ public class HolidayService {
         holidays.add(new HolidayDto("Ziua Națională a României", LocalDate.of(year, 12, 1)));
         holidays.add(new HolidayDto("Crăciunul", LocalDate.of(year, 12, 25)));
         holidays.add(new HolidayDto("A doua zi de Crăciun", LocalDate.of(year, 12, 26)));
+
+        holidays.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
 
         return holidays;
     }
