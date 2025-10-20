@@ -23,6 +23,8 @@ public class HolidayService {
         holidays.add(new HolidayDto("Vinerea Mare", calculateGoodFriday(year)));
         holidays.add(new HolidayDto("Paștele", calculateEaster(year)));
         holidays.add(new HolidayDto("A doua zi de Paște", calculateEaster(year).plusDays(1)));
+        holidays.add(new HolidayDto("Rusalii", calculateEaster(year).plusDays(49)));
+        holidays.add(new HolidayDto("A doua zi de Rusalii", calculateEaster(year).plusDays(50)));
         holidays.add(new HolidayDto("Ziua Muncii", LocalDate.of(year, 5, 1)));
         holidays.add(new HolidayDto("Ziua Copilului", LocalDate.of(year, 6, 1)));
         holidays.add(new HolidayDto("Adormirea Maicii Domnului", LocalDate.of(year, 8, 15)));
